@@ -100,7 +100,7 @@ Visit [http://localhost:8000](http://localhost:8000) in your web browser to expl
 
 ## Contribution Guidelines 🤝
 
-Contributions are the heart of Chat Bharat! If you'd like to contribute, please follow our [Contribution Guidelines](CONTRIBUTING.md).
+Contributions are the heart of Chat Bharat! If you'd like to contribute, please follow our [Contribution Guidelines](CONTRIBUTING.md.txt).
 
 ## License 📄
 
