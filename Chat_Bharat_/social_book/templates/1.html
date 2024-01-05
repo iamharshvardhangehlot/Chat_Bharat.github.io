@@ -1,0 +1,56 @@
+<form action="/follow" method="POST"
+                        class="grid grid-cols- mx-auto order-last md:order-first mt-20 md:mt-0 text-center border-4 border-black w-full ">
+                        <div class="">
+                            {% csrf_token %}
+                            <!-- Post Count -->
+                            <div>
+                                {% if user_post_length == 0 %}
+                                <p class="font-bold text-gray-700 text-xl">0</p>
+                                <p class="text-gray-400">Post</p>
+                                {% elif user_post_length == 1 %}
+                                <p class="font-bold text-gray-700 text-xl">1</p>
+                                <p class="text-gray-400">Post</p>
+                                {% else %}
+                                <p class="font-bold text-gray-700 text-xl">{{user_post_length}}</p>
+                                <p class="text-gray-400">Posts</p>
+                                {% endif %}
+                            </div>
+                            <!-- Followers Count -->
+                            <div>
+                                {% if user_followers == 0 or user_followers == 1 %}
+                                <p class="font-bold text-gray-700 text-xl">{{user_followers}}</p>
+                                <p class="text-gray-400">Follower</p>
+                                {% else %}
+                                <p class="font-bold text-gray-700 text-xl">{{user_followers}}</p>
+                                <p class="text-gray-400">Followers</p>
+                                {% endif %}
+                            </div>
+                            <!-- Following Count -->
+                            <div>
+                                <p class="font-bold text-gray-700 text-xl">{{user_following}}</p>
+                                <p class="text-gray-400">Following</p>
+                                <input type="hidden" value="{{user.username}}" name="follower" />
+                                <input type="hidden" value="{{user_object.username}}" name="user" />
+                            </div>
+                        </div>
+                        <!-- Account/Follow/unfollow button -->
+                        <div
+                            class="md:space-x-4 md:space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center lg:justify-center me-0">
+                            {% if user_object.username == user.username %}
+                            <a href="/settings"><button
+                                    class="text-white p-4 uppercase rounded bg-indigo-600 hover:bg-indigo-700 shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
+                                    Edit profile
+                                </button>
+                            </a>
+                            {% else %}
+                            <a data-ripple="edit-profile"><button type="submit"
+                                    class="text-white p-4 uppercase rounded bg-indigo-600 hover:bg-indigo-700 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">{{button_text}}</button></a>
+
+                            {% endif %}
+
+                            <button
+                                class="text-white p-4 uppercase rounded bg-indigo-600 hover:bg-indigo-700 shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
+                                Message
+                            </button>
+                        </div>
+                    </form>

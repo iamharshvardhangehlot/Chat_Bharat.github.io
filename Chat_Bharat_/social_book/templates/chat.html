@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comments</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  <style>
+    /* width */
+    div::-webkit-scrollbar {
+      width: 6px;
+      display: none;
+    }
+
+    /* Track */
+    /* ::-webkit-scrollbar-track:hover {
+      box-shadow: inset 0 0 2px grey;
+      border-radius: 5  px;
+
+    } */
+
+    /* Handle */
+    div::-webkit-scrollbar-thumb {
+      background: lightgray;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    div::-webkit-scrollbar-thumb:hover {
+      background: #7770f5;
+      border-radius: 10px;
+    }
+
+    textarea {
+      cursor: auto;
+    }
+
+
+    body {
+      background: url(https://img.freepik.com/free-vector/realistic-3d-shapes-floating-background_23-2148913784.jpg?w=740&t=st=1696276457~exp=1696277057~hmac=8e53118a3841008c7fdcb22ca3eae369526a7cbb84b2a0506f73a836aa5caf95) no-repeat !important;
+      background-size: cover !important;
+    }
+
+
+    .glass-lg {
+      background: rgba(255, 255, 255, 0.5) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="h-screen  relative backdrop-blur-sm">
+    <div
+      class="max-[425px]:w-11/12 md:w-3/5 xl:w-2/5 w-1/2 h-fit mx-auto p-8 rounded-lg glass-lg shadow-xl absolute top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4">
+
+      <div class="w-full ">
+        <div class="flex justify-between">
+          <p class="text-lg max-[425px]:text-md font-semibold text-gray-600 mb-4 ml-1 text-wrap font-sensorder-last">
+            <a href="/">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 hover:scale-125 hover:text-indigo-600">
+                <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+              </svg>
+            </a>
+              <img src="{% static 'assets/images/comingsoon.png' %}" alt="">
+          </p>
+
+        </div>
+
+        
+      </div>
+
+    </div>
+  </div>
+
+
+  
+</body>
+
+</html>

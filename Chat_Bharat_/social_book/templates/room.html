@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comments</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  <style>
+    /* width */
+    div::-webkit-scrollbar {
+      width: 6px;
+      display: none;
+    }
+
+    /* Track */
+    /* ::-webkit-scrollbar-track:hover {
+      box-shadow: inset 0 0 2px grey;
+      border-radius: 5  px;
+
+    } */
+
+    /* Handle */
+    div::-webkit-scrollbar-thumb {
+      background: lightgray;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    div::-webkit-scrollbar-thumb:hover {
+      background: #7770f5;
+      border-radius: 10px;
+    }
+
+    textarea {
+      cursor: auto;
+    }
+
+
+    body {
+      background: url(https://img.freepik.com/free-vector/realistic-3d-shapes-floating-background_23-2148913784.jpg?w=740&t=st=1696276457~exp=1696277057~hmac=8e53118a3841008c7fdcb22ca3eae369526a7cbb84b2a0506f73a836aa5caf95) no-repeat !important;
+      background-size: cover !important;
+    }
+
+
+    .glass-lg {
+      background: rgba(255, 255, 255, 0.5) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="h-screen  relative backdrop-blur-sm">
+    <div
+      class="max-[425px]:w-11/12 md:w-3/5 xl:w-2/5 w-1/2 h-fit mx-auto p-8 rounded-lg glass-lg shadow-xl absolute top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4">
+
+      <div class="w-full ">
+        <div class="flex justify-between">
+          <p
+            class="text-xl max-[425px]:text-md font-semibold text-gray-600 mb-4 ml-1 text-wrap font-sens underline underline-offset-8  order-first">
+            Comments
+          </p>
+          <p class="text-lg max-[425px]:text-md font-semibold text-gray-600 mb-4 ml-1 text-wrap font-sensorder-last">
+            <a href="/">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 hover:scale-125 hover:text-indigo-600">
+                <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+              </svg>
+              
+            </a>
+
+          </p>
+
+        </div>
+        <!-- Comment Section -->
+        <div id="display" class="rounded-lg overflow-y-auto h-96">
+
+        </div>
+
+        <form id="post-form">
+          {% csrf_token %}
+          <input type="hidden" name="username" id="username" value="{{username}}" />
+          <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}" />
+
+          <div class="flex pt-4 pr-2.5 ">
+
+            <!-- comment input box -->
+            <input type="text" id="message" name="message"
+              class="block py-2 w-full text-base text-gray-900 rounded-lg border border-gray-300 glass-lg shadow-lg mr-2"
+              placeholder="Comment.........">
+
+            <!-- comment send btn -->
+            <button type="submit" id="chat-message-submit" class="text-gray-500" title="Send">
+              <svg class="w-6 h-6 rotate-90 hover:text-indigo-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                viewBox="0 0 18 20">
+                <path
+                  d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
+              </svg>
+            </button>
+
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- INPUT BOX VALIDATION -->
+  <script>
+    document.getElementById('message').addEventListener('input', function () {
+      const messageInput = this.value.trim(); // Use trim() to remove leading and trailing spaces
+      const submitButton = document.getElementById('chat-message-submit');
+
+      // Check if the trimmed input is not empty
+      if (messageInput !== '') {
+        submitButton.disabled = false;
+        submitButton.classList.add("text-indigo-600", "p-2", "rounded-lg", "cursor-pointer", "hover:scale-110", "active:scale-75", "transition", "duration-150", "ease-in-out", "hover:bg-indigo-500", "hover:text-white");
+        submitButton.classList.replace("hidden", "flex");
+
+      } else {
+        submitButton.disabled = true;
+        submitButton.classList.remove("text-indigo-600", "p-2", "rounded-lg", "cursor-pointer", "hover:scale-110", "active:scale-75", "transition", "duration-150", "ease-in-out", "hover:bg-indigo-500", "hover:text-white");
+        submitButton.classList.replace("flex", "hidden");
+      }
+    });
+
+    // Disable the submit button by default when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+      const submitButton = document.getElementById('chat-message-submit');
+      submitButton.disabled = true;
+      submitButton.classList.add("hidden", "text-gray-500");
+
+    })
+
+
+
+    // Add an event listener for the Enter key
+    document.getElementById('message').addEventListener('keydown', function (event) {
+      const messageInput = this.value.trim();
+      const submitButton = document.getElementById('chat-message-submit');
+
+      if (event.key === 'Enter' && messageInput !== '') {
+        // Prevent the default Enter key behavior (form submission)
+        event.preventDefault();
+
+        // Trigger a click on the submit button
+        submitButton.click();
+      }
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      const displayContainer = $("#display");
+
+      function scrollToBottom() {
+        displayContainer.scrollTop(displayContainer.prop("scrollHeight"));
+      }
+
+      setInterval(function () {
+        $.ajax({
+          type: 'GET',
+          url: "/getMessages/{{room}}/",
+          success: function (response) {
+            console.log(response);
+            displayContainer.empty();
+            for (let key in response.messages) {
+              const timestamp = moment(response.messages[key].date, 'YYYY-MM-DDhh:mm:ss.sss').fromNow();
+              let temp = "<div class='container darker border border-gray-200 bg-white shadow-md mb-2 rounded-md p-4'><span class='font-semibold capitalize text-base'>" + response.messages[key].user + ":" + "</span><span class='text-xs pl-1 text-gray-500'>" + timestamp + "</span> <p class='text-base text-gray-700 leading-5 text-clip'>" + response.messages[key].value + "</p></div>";
+              displayContainer.append(temp);
+            }
+            scrollToBottom(); // Scroll to the bottom after adding new messages
+          },
+          error: function (response) {
+            // alert('An error occurred')
+          }
+        });
+      }, 1000);
+
+      // Scroll to bottom on page load
+      scrollToBottom();
+
+    });
+
+  </script>
+
+
+
+  <!-- COMMENT GET -->
+  <!-- Include moment.js for Time ago format -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+  <!-- <script>
+    $(document).ready(function () {
+      setInterval(function () {
+        $.ajax({
+          type: 'GET',
+          url: "/getMessages/{{room}}/",
+          success: function (response) {
+            console.log(response);
+            $("#display").empty();
+            for (let key in response.messages) {
+              const timestamp = moment(response.messages[key].date, 'YYYY-MM-DDhh:mm:ss.sss').fromNow(); //time ago format
+              let temp = "<div class='container darker border border-gray-200 bg-white shadow-md mb-2 rounded-md p-4'><strong>" + response.messages[key].user + ":" + "</strong><span class='text-xs pl-1 text-gray-500'>" + timestamp + "</span> <p class='text-sm text-gray-700 leading-5'>" + response.messages[key].value + "</p></div>";
+              $("#display").append(temp);
+            }
+          },
+          error: function (response) {
+            // alert('An error occurred')
+          }
+        });
+      }, 1000);
+    })
+  </script> -->
+
+  <!-- COMMENT POST -->
+  <script type="text/javascript">
+    $(document).on('submit', '#post-form', function (e) {
+      e.preventDefault();
+
+      $.ajax({
+        type: 'POST',
+        url: '/send',
+        data: {
+          username: $('#username').val(),
+          room_id: $('#room_id').val(),
+          message: $('#message').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+        success: function (data) {
+          const submitButton = document.getElementById('chat-message-submit');
+          submitButton.disabled = true;
+          submitButton.classList.remove("text-indigo-600", "p-2", "rounded-lg", "cursor-pointer", "hover:scale-110", "active:scale-75", "transition", "duration-150", "ease-in-out", "hover:bg-indigo-500", "hover:text-white");
+          submitButton.classList.replace("flex", "hidden");
+
+        }
+      });
+      document.getElementById('message').value = ''
+    });
+  </script>
+
+  <!-- EMOJI CDN-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.js"></script>
+  <script>
+    // $("#message").emojioneArea()
+  </script>
+
+</body>
+
+</html>
