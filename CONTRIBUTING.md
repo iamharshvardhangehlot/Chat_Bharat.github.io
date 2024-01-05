@@ -44,4 +44,4 @@ Be receptive to feedback during the review process.
 
 Reach out through code.ryl0000@gmail.com or open an issue for discussion.
 
-By contributing, you agree to these instructions and the [Code of Conduct](CODE_OF_CONDUCT.md). Thanks for your contributions! 🚀
+By contributing, you agree to these instructions and the Code of Conduct. Thanks for your contributions! 🚀
