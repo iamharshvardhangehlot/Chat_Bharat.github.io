@@ -104,7 +104,7 @@ Contributions are the heart of Chat Bharat! If you'd like to contribute, please 
 
 ## License 📄
 
-This project is licensed under the [ChatBharat](LICENSE.md).
+This project is licensed under the [Code.ryl](LICENSE.md).
 
 ---
 
